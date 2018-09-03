@@ -4,30 +4,40 @@ public class Employee {
 	
 long employeeId ;
 String employeeName ;
-String employeeAddress ;
-long employeePhone ;
 double basicSalary ;
-double transportAllowance ;
-final double specialAllowance=250.8 ;
-final double HRA=1000.50 ;
+double HRA=0 ;
+double PF=0 ;
+double PT=0 ;
+double grossSalary ;
+double medical ;
+double netSalary ;
 
 public Employee()
 {
 	
 }
-public Employee(long employeeId, String employeeName, String employeeAddress, long employeePhone,double basicSalary) {
+
+
+public Employee(long employeeId, String employeeName, double medical) {
 	super();
 	this.employeeId = employeeId;
 	this.employeeName = employeeName;
-	this.employeeAddress = employeeAddress;
-	this.employeePhone = employeePhone;
-	this.basicSalary=basicSalary ;
+	this.medical = medical;
 }
-public void calculateSalary(double basicSalary)
+
+
+public double calculateNetSalary(double basicSalary)
 {
-	double salary ;
-	salary=basicSalary + ( basicSalary * specialAllowance/100) + ( basicSalary * HRA/100) ;
-	System.out.println("Salary: "+salary);
+	HRA=0.5*basicSalary ;
+	PF=0.12*basicSalary ;
+	grossSalary=HRA+basicSalary+medical ;
+	netSalary=grossSalary-(PF+PT) ;
+	return netSalary ;
+}
+
+public void displayEmployeInformation()
+{
+	System.out.println("id: "+employeeId+"\nname"+employeeName+"\nNetSalary"+netSalary);
 }
 
 
